@@ -1,6 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap');
+
+@import url('/css/header.css');
+@import url('/css/hero.css');
+@import url('/css/navigation.css');
+@import url('/css/footer.css');
+
+/*/ ==== [ Ini variables ] ==== /*/
+
+:root {
+  --base: rgb(32, 111, 141);
+  --base-alpha: rgba(32, 111, 141, .55);
+  --gray-dark: #131723;
+  --blue-light: #49AEC0;
+  --orange: #FE5A27;
+  --white: rgb(254, 242, 202);
+  --white-alpha: rgba(254, 242, 202, .65);
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+/*/ ==== [ Styles ] ==== /*/
+
+*:focus {
+  outline: none;
+}
+
+body {
+  font-size: 1rem;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Cabin';
+}
+
+h3,
+h5,
+ul,
+p {
+  margin: 0;
+}
+
+.container {
+  font-family: 'Barlow';
+  margin: 0 auto;
+  max-width: 1320px;
+  padding: 0 20px;
+}
+
+
+/*/ ==== [ Meida Queries ] ==== /*/
+
+@media screen and (max-width: 601px) {
+
+  .hero {
+    padding: 20px;
+  }
+
+  .features > div {
+    left: 0;
+  }
+
+  .row.reverse {
+    display: block;
+  }
+
+  .row.reverse > div:first-child {
+    align-items: baseline;
+  }
+
 }
