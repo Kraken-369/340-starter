@@ -10,10 +10,8 @@ const express = require("express")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
-// const expressLayouts = require("express-ejs-layouts")
 
 app.set('views', path.join(__dirname, 'views'))
-// app.use(expressLayouts)
 app.set("view engine", "ejs")
 
 /* ***********************
@@ -37,5 +35,5 @@ app.listen(port, () => {
 
 // Index route
 app.get('/', function(req, res) {
-  res.render('index', {title: 'Home'})
+  res.render('index', {title: 'CSE Motor'})
 })

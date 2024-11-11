@@ -1,0 +1,28 @@
+.hero {
+  padding: 20px 135px;
+}
+
+.features {
+  text-align: right;
+}
+
+.features > div {
+  background-color: var(--white-alpha);
+  font-size: 1.6em;
+  left: 275px;
+  padding: 40px;
+  position: absolute;
+  text-align: left;
+}
+
+.features button {
+  background-color: var(--base);
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  cursor: pointer;
+  float: right;
+  font-size: .9em;
+  margin-top: 30px;
+  padding: 10px 20px;
+}
