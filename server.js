@@ -6,13 +6,14 @@
  * Require Statements
  *************************/
 var path = require('path')
-const express = require("express")
-const env = require("dotenv").config()
+const express = require('express')
+const env = require('dotenv').config()
 const app = express()
-const static = require("./routes/static")
+const static = require('./routes/static')
+const baseController = require('./controllers/baseController')
 
 app.set('views', path.join(__dirname, 'views'))
-app.set("view engine", "ejs")
+app.set('view engine', 'ejs')
 
 /* ***********************
  * Routes
@@ -34,6 +35,8 @@ app.listen(port, () => {
 })
 
 // Index route
-app.get('/', function(req, res) {
-  res.render('index', {title: 'CSE Motor'})
-})
+// app.get('/', function(req, res) {
+//   res.render('index', {title: 'CSE Motor'})
+// })
+
+app.get('/', baseController.buildHome)
