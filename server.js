@@ -27,6 +27,8 @@ app.use(static)
 const port = process.env.PORT
 const host = process.env.HOST
 
+console.log(`On server.js file: ${process.env.DATABASE_URL}`)
+
 /* ***********************
  * Log statement to confirm server operation
  *************************/
