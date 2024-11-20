@@ -7,7 +7,6 @@ require('dotenv').config()
  * If - else will make determination which to use
  * *************** */
 let pool
-console.log('Inside base controller')
 
 if (process.env.NODE_ENV == 'development') {
   pool = new Pool({
@@ -35,6 +34,5 @@ if (process.env.NODE_ENV == 'development') {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
   })
-  console.log('On production environment: ', process.env.DATABASE_URL)
   module.exports = pool
 }

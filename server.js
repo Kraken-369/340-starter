@@ -27,13 +27,11 @@ app.use(static)
 const port = process.env.PORT
 const host = process.env.HOST
 
-console.log(`On server.js file: ${process.env.DATABASE_URL}`)
-
 /* ***********************
  * Log statement to confirm server operation
  *************************/
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
+  console.log(`---= :: Run APP :: =---`)
 })
 
 // Index route
