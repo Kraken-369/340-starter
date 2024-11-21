@@ -12,6 +12,7 @@ const app = express()
 const static = require('./routes/static')
 const invetoryRoute = require('./routes/inventoryRoute')
 const baseController = require('./controllers/baseController')
+const utilities = require('./utilities/')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -21,6 +22,17 @@ app.set('view engine', 'ejs')
  *************************/
 app.use(static)
 app.use('/inv', invetoryRoute)
+app.use(async (req, res, next) => next({status: 404, message: 'Sorry, we appear to have lost that page.'}))
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+
+  console.log(`Error at: ${req.originalURL}: ${err.message}`)
+  res.render('errors/error', {
+    title: err.status || 'Server Error',
+    message: err.message,
+    nav
+  })
+})
 
 /* ***********************
  * Local Server Information
