@@ -2,6 +2,10 @@
   padding: 20px 135px;
 }
 
+.hero h1 {
+  text-align: center;
+}
+
 .features {
   text-align: right;
 }

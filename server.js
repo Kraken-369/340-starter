@@ -10,6 +10,7 @@ const express = require('express')
 const env = require('dotenv').config()
 const app = express()
 const static = require('./routes/static')
+const invetoryRoute = require('./routes/inventoryRoute')
 const baseController = require('./controllers/baseController')
 
 app.set('views', path.join(__dirname, 'views'))
@@ -19,6 +20,7 @@ app.set('view engine', 'ejs')
  * Routes
  *************************/
 app.use(static)
+app.use('/inv', invetoryRoute)
 
 /* ***********************
  * Local Server Information
