@@ -17,4 +17,18 @@ inventoryController.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+inventoryController.buildDetailPage = async (req, res, next) => {
+  const inv_id = req.params.inv_id
+  const data = await inventoryModel.getProductDetail(inv_id)
+  const nav = await utilities.getNav()
+  const detail =  await utilities.buildProductDetail(data[0])
+
+  console.log(data)
+  res.render('./inventory/productDetail', {
+    title: `${data[0].inv_make} ${data[0].inv_model} ${data[0].inv_year}`,
+    nav,
+    detail
+  })
+}
+
 module.exports = inventoryController

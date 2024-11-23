@@ -5,6 +5,7 @@
 @import url('/css/hero.css');
 @import url('/css/navigation.css');
 @import url('/css/footer.css');
+@import url('/css/product.css');
 
 /*/ ==== [ Ini variables ] ==== /*/
 
@@ -75,8 +76,13 @@ p {
     left: 0;
   }
 
-  .row.reverse {
+  .row.reverse,
+  .product-detail {
     display: block;
+  }
+
+  .product-detail > div {
+    width: 100%;
   }
 
   .row.reverse > div:first-child {

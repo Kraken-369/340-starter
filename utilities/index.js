@@ -28,6 +28,7 @@ Util.getNav = async (req, res, next) => {
 
 Util.buildClassificationGrid = async (data) => {
   let grid
+
   if (data.length > 0) {
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
@@ -53,7 +54,24 @@ Util.buildClassificationGrid = async (data) => {
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
+  
   return grid
+}
+
+Util.buildProductDetail = async data => {
+  let detail
+
+  detail = `<div>
+      <p>${data.inv_description}</p>
+      <p>Color: <span>${data.inv_color}</span></p>
+      <p>Miles: <span>${new Intl.NumberFormat('en-US').format(data.inv_miles)}</span></p>
+      <p>Price: <span>$${new Intl.NumberFormat('en-US').format(data.inv_price)}</span></p>
+    </div>
+    <div>
+      <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
+    </div>`
+
+  return detail
 }
 
 /* ****************************************
