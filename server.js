@@ -32,7 +32,6 @@ app.use(async (req, res, next) => next({status: 404, message: 'Sorry, we appear 
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   
-  // console.log(`Error at: ${req.originalURL}: ${err.message}`)
   res.render('errors/error', {
     title: err.status || 'Server Error',
     message: err.message,

@@ -1,0 +1,11 @@
+<div class="container">
+  <% if (title) { %>
+    <h1>
+      <%= title %>
+    </h1>
+  <% } else { res.redirect('/') } %>
+  <hr>
+  <div class="product-detail">
+    <%- detail %>
+  </div>
+</div>
