@@ -23,7 +23,6 @@ inventoryController.buildDetailPage = async (req, res, next) => {
   const nav = await utilities.getNav()
   const detail =  await utilities.buildProductDetail(data[0])
 
-  console.log(data)
   res.render('./inventory/productDetail', {
     title: `${data[0].inv_make} ${data[0].inv_model} ${data[0].inv_year}`,
     nav,
