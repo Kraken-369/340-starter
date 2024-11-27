@@ -26,12 +26,14 @@ app.use('/inv', inventoryRoute)
 app.get('/', baseController.buildHome)
 
 /* -----[ Middleware to handling routes not found ]----- */
-app.use(async (req, res, next) => next({status: 404, message: 'Sorry, we appear to have lost that page.'}))
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
 
 /* -----[ Middleware to handling errors ]----- */
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
-  
+
   res.render('errors/error', {
     title: err.status || 'Server Error',
     message: err.message,
@@ -50,5 +52,5 @@ const host = process.env.HOST
  * Log statement to confirm server operation
  *************************/
 app.listen(port, () => {
-  console.log(`---= :: Run APP :: =---`)
+  console.log(`---= :: Running APP :: =---`)
 })
