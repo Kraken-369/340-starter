@@ -5,10 +5,18 @@
   <label for="account_lastname">Last Name:</label>
   <input id="account_lastname" name="account_lastname" type="text">
   <label for="account_email">Email address:</label>
-  <input id="account_email" name="account_email" type="email">
+  <input id="account_email" name="account_email" type="email" placeholder="Enter a valid email address">
   <label for="account_password">Password:</label>
   <input id="account_password" name="account_password" type="password">
   <button type="submit">Sign Up</button>
 </form>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <h2><%- messages() %></h2>
