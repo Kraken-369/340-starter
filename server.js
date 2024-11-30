@@ -10,11 +10,13 @@ const express = require('express')
 const env = require('dotenv').config()
 const app = express()
 const static = require('./routes/static')
+const accountRoute = require('./routes/accountRoute')
 const inventoryRoute = require('./routes/inventoryRoute')
 const baseController = require('./controllers/baseController')
 const utilities = require('./utilities/')
 const session = require("express-session")
 const pool = require('./database/')
+const bodyParser = require('body-parser')
 
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
@@ -34,6 +36,9 @@ app.use(function(req, res, next){
   next()
 })
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
@@ -42,7 +47,8 @@ app.set('view engine', 'ejs')
  *************************/
 app.use(static)
 app.use('/inv', inventoryRoute)
-
+// app.use('/', accountRoute)
+app.use('/account', require('./routes/accountRoute'))
 app.get('/', baseController.buildHome)
 
 /* -----[ Middleware to handling routes not found ]----- */
