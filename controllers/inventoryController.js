@@ -45,10 +45,10 @@ inventoryController.buildDetailPage = async (req, res, next) => {
 
 }
 
-inventoryController.getInventory = async (req, res, next) => {
+inventoryController.getManagement = async (req, res, next) => {
   let nav = await utilities.getNav()
 
-  res.render('./inventory/index', {
+  res.render('./inventory/management', {
     title: 'Vehicle Management',
     nav,
     errors: null
