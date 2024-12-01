@@ -8,32 +8,36 @@ classificationController.buildRegister = async (req, res, next) => {
   res.render('classification/register', {
     title: 'Add Classification',
     nav,
+    classification_name: '',
     errors: null,
   })
 }
 
 classificationController.registerClassification = async (req, res) => {
-  let nav = await utilities.getNav()
-  const { classification_name } = req.body
+  const { classification_name } = req.body || ''
   const registerResult = await classificationModule.registerClassification(classification_name)
+  
+  let nav = await utilities.getNav()
 
   if (registerResult) {
     req.flash(
       'notice',
       `New Classification ${classification_name} was registered.`
     )
-    res.status(201).render('classification/register', {
+    return res.status(201).render('classification/register', {
       title: 'Add Classification',
       nav,
+      classification_name,
     })
   } else {
     req.flash(
       'notice',
       'Sorry, the registration failed.'
     )
-    res.status(501).render('classification/register', {
+    return res.status(501).render('classification/register', {
       title: 'Add Classification',
       nav,
+      classification_name,
     })
   }
 }
