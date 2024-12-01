@@ -7,10 +7,8 @@
  *************************/
 var path = require('path')
 const express = require('express')
-const env = require('dotenv').config()
 const app = express()
 const static = require('./routes/static')
-const accountRoute = require('./routes/accountRoute')
 const inventoryRoute = require('./routes/inventoryRoute')
 const baseController = require('./controllers/baseController')
 const utilities = require('./utilities/')
@@ -46,8 +44,8 @@ app.set('view engine', 'ejs')
  * Routes
  *************************/
 app.use(static)
-app.use('/inv', inventoryRoute)
-// app.use('/', accountRoute)
+app.use('/inventory', inventoryRoute)
+app.use('/inventory', require('./routes/classificationRoute'))
 app.use('/account', require('./routes/accountRoute'))
 app.get('/', baseController.buildHome)
 
@@ -72,7 +70,6 @@ app.use(async (err, req, res, next) => {
  * Values from .env (environment) file
  *************************/
 const port = process.env.PORT
-const host = process.env.HOST
 
 /* ***********************
  * Log statement to confirm server operation

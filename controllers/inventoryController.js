@@ -8,10 +8,19 @@ inventoryController.buildByClassificationId = async function (req, res, next) {
   const data = await inventoryModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
-  const className = data[0].classification_name
+  let title = ''
   
+  if (data[0] === undefined) {
+    req.flash(
+      'notice',
+      'This classification does not have any inventory items.'
+    )
+  }
+  else {
+    title = data[0].classification_name + ' vehicles'
+  }
   res.render('./inventory/classification', {
-    title: className + ' vehicles',
+    title,
     nav,
     grid,
   })
@@ -34,6 +43,16 @@ inventoryController.buildDetailPage = async (req, res, next) => {
     next(err)
   }
 
+}
+
+inventoryController.getInventory = async (req, res, next) => {
+  let nav = await utilities.getNav()
+
+  res.render('./inventory/index', {
+    title: 'Vehicle Management',
+    nav,
+    errors: null
+  })
 }
 
 module.exports = inventoryController
