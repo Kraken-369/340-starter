@@ -55,4 +55,67 @@ inventoryController.getManagement = async (req, res, next) => {
   })
 }
 
+inventoryController.buildAddInventory = async (req, res, next) => {
+  let nav = await utilities.getNav()
+  let classificationList = await utilities.buildClassificationList()
+
+  res.render('./inventory/addInventory', {
+    title: 'Add Inventory',
+    nav,
+    classificationList,
+    errors: null,
+  })
+}
+
+inventoryController.registerNewVehicle = async (req, res, next) => {
+  const {
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color
+  } = req.body
+  const registerResult = await inventoryModel.newVehicle(
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color
+  )
+  let nav = await utilities.getNav()
+  let classificationList = await utilities.buildClassificationList()
+
+  if (registerResult) {
+    req.flash(
+      'notice',
+      `New Vehicle ${inv_make} ${inv_model} ${inv_year} was registered.`
+    )
+    return res.status(201).render('inventory/addInventory', {
+      title: 'Add Classification',
+      nav,
+      classificationList
+    })
+  } else {
+    req.flash(
+      'notice',
+      'Sorry, the registration failed.'
+    )
+    return res.status(501).render('inventory/addInventory', {
+      title: 'Add Classification',
+      nav,
+      classificationList
+    })
+  }
+}
+
 module.exports = inventoryController

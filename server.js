@@ -7,14 +7,15 @@
  *************************/
 var path = require('path')
 const express = require('express')
-const app = express()
+const session = require("express-session")
+const ejsLayouts = require('express-ejs-layouts');
 const static = require('./routes/static')
 const inventoryRoute = require('./routes/inventoryRoute')
 const baseController = require('./controllers/baseController')
 const utilities = require('./utilities/')
-const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require('body-parser')
+const app = express()
 
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
@@ -39,6 +40,8 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
+app.use(ejsLayouts)
 
 /* ***********************
  * Routes
