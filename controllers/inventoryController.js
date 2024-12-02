@@ -103,7 +103,8 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
     return res.status(201).render('inventory/addInventory', {
       title: 'Add Classification',
       nav,
-      classificationList
+      classificationList,
+      errors: null
     })
   } else {
     req.flash(
@@ -113,7 +114,8 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
     return res.status(501).render('inventory/addInventory', {
       title: 'Add Classification',
       nav,
-      classificationList
+      classificationList,
+      errors
     })
   }
 }

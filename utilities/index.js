@@ -35,7 +35,7 @@ Util.buildClassificationGrid = async (data) => {
       grid += '<li>'
       grid +=  '<a href="../../inventory/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail ? vehicle.inv_thumbnail : '/images/vehicles/no-image-tn.jpg'
+      + 'details"><img src="' + (vehicle.inv_thumbnail ? vehicle.inv_thumbnail : '/images/vehicles/no-image-tn.png')
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
@@ -64,7 +64,7 @@ Util.buildProductDetail = async data => {
   }
 
   let detail
-  let image = data.inv_image ? data.inv_image : '/images/vehicles/no-image.jpg'
+  let image = data.inv_image ? data.inv_image : '/images/vehicles/no-image.png'
 
   detail = `<div>
       <p>${data.inv_description}</p>
