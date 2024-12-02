@@ -48,3 +48,11 @@
     <div><button type="submit">Add to inventory</button></div>
   </form>
 </div>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>

@@ -35,7 +35,7 @@ Util.buildClassificationGrid = async (data) => {
       grid += '<li>'
       grid +=  '<a href="../../inventory/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
+      + 'details"><img src="' + vehicle.inv_thumbnail ? vehicle.inv_thumbnail : '/images/vehicles/no-image-tn.jpg'
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
@@ -64,6 +64,7 @@ Util.buildProductDetail = async data => {
   }
 
   let detail
+  let image = data.inv_image ? data.inv_image : '/images/vehicles/no-image.jpg'
 
   detail = `<div>
       <p>${data.inv_description}</p>
@@ -72,7 +73,7 @@ Util.buildProductDetail = async data => {
       <p>Price: <span>$${new Intl.NumberFormat('en-US').format(data.inv_price)}</span></p>
     </div>
     <div>
-      <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
+      <img src="${image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
     </div>`
 
   return detail
@@ -80,7 +81,7 @@ Util.buildProductDetail = async data => {
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await inventoryModel.getClassifications()
-  let classificationList ='<select name="classification_id" id="classificationList" required>'
+  let classificationList ='<select name="classification_id" id="classificationList">'
   
   classificationList += "<option value=''>Choose a Classification</option>"
   
