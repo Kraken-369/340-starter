@@ -1,5 +1,18 @@
+const path = require('path')
+const fs = require('fs')
 const inventoryModel = require('../models/inventoryModel')
 const Util = {}
+
+const getImage = (image, tn=false) => {
+  const noImage = tn ? 'no-image-tn.png' : 'no-image.png'
+  const imageDir = path.join(__dirname, '../public', image)
+
+  if (!fs.existsSync(imageDir)) {
+    return `/images/vehicles/${noImage}`
+  }
+
+  return image
+}
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -35,7 +48,7 @@ Util.buildClassificationGrid = async (data) => {
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + (vehicle.inv_thumbnail ? vehicle.inv_thumbnail : '/images/vehicles/no-image-tn.png')
+      + 'details"><img src="' + getImage(vehicle.inv_thumbnail, true)
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
@@ -64,7 +77,6 @@ Util.buildProductDetail = async data => {
   }
 
   let detail
-  let image = data.inv_image ? data.inv_image : '/images/vehicles/no-image.png'
 
   detail = `<div>
       <p>${data.inv_description}</p>
@@ -73,7 +85,7 @@ Util.buildProductDetail = async data => {
       <p>Price: <span>$${new Intl.NumberFormat('en-US').format(data.inv_price)}</span></p>
     </div>
     <div>
-      <img src="${image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
+      <img src="${getImage(data.inv_image)}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors" />
     </div>`
 
   return detail
