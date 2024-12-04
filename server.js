@@ -47,8 +47,8 @@ app.use(ejsLayouts)
  * Routes
  *************************/
 app.use(static)
-app.use('/inventory', inventoryRoute)
-app.use('/inventory', require('./routes/classificationRoute'))
+app.use('/inv', inventoryRoute)
+app.use('/inv', require('./routes/classificationRoute'))
 app.use('/account', require('./routes/accountRoute'))
 app.get('/', baseController.buildHome)
 
