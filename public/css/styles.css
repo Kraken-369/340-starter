@@ -66,7 +66,7 @@ p {
 
 /*/ ==== [ Meida Queries ] ==== /*/
 
-@media screen and (max-width: 601px) {
+@media screen and (max-width: 768px) {
 
   .hero {
     padding: 20px;
@@ -87,6 +87,35 @@ p {
 
   .row.reverse > div:first-child {
     align-items: baseline;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .nav-bar {
+    display: none;
+  }
+
+  .hamburger-button {
+    display: block;
+  }
+
+  .nav-bar ul {
+    align-items: normal;
+    flex-direction: column;
+  }
+
+  .front-price-section .price {
+    gap: 20px;
+  }
+
+}
+
+@media screen and (min-width: 769px) {
+
+  .hamburger-button {
+    display: none;
   }
 
 }
