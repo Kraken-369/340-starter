@@ -15,6 +15,7 @@ const baseController = require('./controllers/baseController')
 const utilities = require('./utilities/')
 const pool = require('./database/')
 const bodyParser = require('body-parser')
+const cookieParser = require("cookie-parser")
 const app = express()
 
 app.use(session({
@@ -27,6 +28,7 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
+app.use(cookieParser())
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
@@ -34,6 +36,8 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+app.use(utilities.checkJWTToken)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded

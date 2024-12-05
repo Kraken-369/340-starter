@@ -1,11 +1,19 @@
-<h1><%= title %></h1>
-<form action="">
-  <label for="account_email">E-Mail:</label>
-  <input id="account_email" name="account_email" type="text">
-  <label for="account_password">Password:</label>
-  <input id="account_password" name="account_password" type="text">
-  <button>Submit</button>
-</form>
-<h3>No account? <a href="/account/register">Sign-up</a></h3>
+<div class="container">
+  <h1><%= title %></h1>
+  <form id="loginForm" action="/account/login" method="post">
+    <label for="account_email">E-Mail:</label>
+    <input id="account_email" name="account_email" type="text">
+    <label for="account_password">Password:</label>
+    <input id="account_password" name="account_password" type="text">
+    <button>Submit</button>
+  </form>
+  <h3>No account? <a href="/account/register">Sign-up</a></h3>
+</div>
 
-<h2><%- messages() %></h2>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
