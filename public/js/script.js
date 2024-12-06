@@ -6,7 +6,6 @@ document.getElementById('current-year').innerText = new Date().getFullYear();
 
 const menu = document.getElementById('main-menu');
 const hamburgerButton = document.querySelector('.hamburger-button');
-console.log(menu);
 
 const toggleMenu = () => {
   if (menu.classList.contains('show-menu')) {

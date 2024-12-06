@@ -45,13 +45,15 @@ inventoryController.buildDetailPage = async (req, res, next) => {
 
 }
 
-inventoryController.getManagement = async (req, res, next) => {
+inventoryController.buildManagementView = async (req, res, next) => {
   let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
 
   res.render('./inventory/management', {
-    title: 'Vehicle Management',
+    title: 'Manage Inventory',
     nav,
-    errors: null
+    classificationSelect,
+    errors: null,
   })
 }
 
@@ -100,7 +102,7 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
       'notice',
       `New Vehicle ${inv_make} ${inv_model} ${inv_year} was registered.`
     )
-    return res.status(201).render('inventory/addInventory', {
+    return res.status(201).render('./inventory/addInventory', {
       title: 'Add Classification',
       nav,
       classificationList,
@@ -111,12 +113,24 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
       'notice',
       'Sorry, the registration failed.'
     )
-    return res.status(501).render('inventory/addInventory', {
+    return res.status(501).render('./inventory/addInventory', {
       title: 'Add Classification',
       nav,
       classificationList,
       errors
     })
+  }
+}
+
+inventoryController.getInventoryJSON = async (req, res, next) => {
+  console.log(req.params)
+  const classificationId = parseInt(req.params.classificationId)
+  const invData = await inventoryModel.getInventoryByClassificationId(classificationId)
+  
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
   }
 }
 
