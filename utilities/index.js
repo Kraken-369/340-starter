@@ -8,8 +8,7 @@ const Util = {}
 const getImage = (image, tn=false) => {
   const noImage = tn ? 'no-image-tn.png' : 'no-image.png'
   const imageDir = path.join(__dirname, '../public', image)
-
-  if (!fs.existsSync(imageDir)) {
+  if (image !== null || image !== 'undefined' || image !== '' || !fs.existsSync(imageDir)) {
     return `/images/vehicles/${noImage}`
   }
 
@@ -101,7 +100,7 @@ Util.buildClassificationList = async function (classification_id = null) {
   
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"'
-    if (classification_id != null && row.classification_id == classification_id) {
+    if (classification_id != null && parseInt(row.classification_id) === parseInt(classification_id)) {
       classificationList += " selected "
     }
     classificationList += ">" + row.classification_name + "</option>"

@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>
+    <%= title %>
+  </h1>
+  <form action="/inv/update" method="post">
+    <div>
+      <label for="">Classification:</label>
+      <div>
+        <%- classificationList %>
+      </div>
+    </div>
+    <div>
+      <label for="inv_make">Make:</label>
+      <div><input id="inv_make" name="inv_make" type="text" value="<%= inv_make %>"></div>
+    </div>
+    <div>
+      <label for="inv_model">Model:</label>
+      <div><input id="inv_model" name="inv_model" type="text" value="<%= inv_model %>"></div>
+    </div>
+    <div>
+      <label for="inv_year">Year:</label>
+      <div><input id="inv_year" name="inv_year" type="text" value="<%= inv_year %>"></div>
+    </div>
+    <div>
+      <label for="inv_description">Description:</label>
+      <div><textarea name="inv_description" id="inv_description"><%= inv_description %></textarea></div>
+    </div>
+    <div>
+      <label for="inv_image">Image:</label>
+      <div><input id="inv_image" name="inv_image" type="text" value="<%= inv_image %>"></div>
+    </div>
+    <div>
+      <label for="inv_thumbnail">Thumbnail:</label>
+      <div><input id="inv_thumbnail" name="inv_thumbnail" type="text" value="<%= inv_thumbnail %>"></div>
+    </div>
+    <div>
+      <label for="inv_price">Price:</label>
+      <div><input id="inv_price" name="inv_price" type="text" value="<%= inv_price %>"></div>
+    </div>
+    <div>
+      <label for="inv_miles">Miles:</label>
+      <div><input tid="inv_miles" name="inv_miles" type="text" value="<%= inv_miles %>"></div>
+    </div>
+    <div>
+      <label for="inv_color">Color:</label>
+      <div><input id="inv_color" name="inv_color" type="text" value="<%= inv_color %>"></div>
+    </div>
+    <div><button type="submit">Update Vehicle</button></div>
+  </form>
+</div>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>

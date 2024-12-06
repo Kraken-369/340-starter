@@ -30,12 +30,12 @@ inventoryController.buildDetailPage = async (req, res, next) => {
   
   try {
     const inv_id = req.params.inv_id
-    const data = await inventoryModel.getProductDetail(inv_id)
+    const data = await inventoryModel.getInventoryById(inv_id)
     const nav = await utilities.getNav()
-    const detail =  await utilities.buildProductDetail(data[0])
+    const detail =  await utilities.buildProductDetail(data)
 
     res.render('./inventory/productDetail', {
-      title: `${data[0].inv_make} ${data[0].inv_model} ${data[0].inv_year}`,
+      title: `${data.inv_make} ${data.inv_model} ${data.inv_year}`,
       nav,
       detail
     })
@@ -123,7 +123,6 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
 }
 
 inventoryController.getInventoryJSON = async (req, res, next) => {
-  console.log(req.params)
   const classificationId = parseInt(req.params.classificationId)
   const invData = await inventoryModel.getInventoryByClassificationId(classificationId)
   
@@ -132,6 +131,32 @@ inventoryController.getInventoryJSON = async (req, res, next) => {
   } else {
     next(new Error("No data returned"))
   }
+}
+
+inventoryController.buildEditInventory = async (req, res, next) => {
+  const invId = parseInt(req.params.invId)
+  const itemData = await inventoryModel.getInventoryById(invId)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  const classificationSelect = await utilities.buildClassificationList(itemData.classification_id)
+  let nav = await utilities.getNav()
+
+  res.render("./inventory/editInventory", {
+    title: "Edit " + itemName,
+    nav,
+    classificationList: classificationSelect,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id
+  })
 }
 
 module.exports = inventoryController

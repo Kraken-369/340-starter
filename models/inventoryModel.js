@@ -23,15 +23,15 @@ const getInventoryByClassificationId = async (classification_id) => {
   }
 }
 
-const getProductDetail = async (inv_id) => {
+const getInventoryById = async (inv_id) => {
   try {
     const data = await pool.query(
       `select * from public.inventory where inv_id = $1`, [inv_id]
     )
 
-    return data.rows
+    return data.rows[0]
   } catch (error)  {
-    console.error(`getProductDetail error: ${error}`)
+    console.error(`getInventoryById error: ${error}`)
     throw error
   } 
 }
@@ -69,4 +69,4 @@ const newVehicle = async (
 
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getProductDetail, newVehicle }
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, newVehicle }

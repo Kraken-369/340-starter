@@ -6,6 +6,7 @@ const inventoryController = require('../controllers/inventoryController')
 
 router.get('/', inventoryController.buildManagementView)
 router.get('/add/vehicle', inventoryController.buildAddInventory)
+router.get('/edit/:invId', inventoryController.buildEditInventory)
 router.get('/type/:classificationId', inventoryController.buildByClassificationId)
 router.get('/detail/:inv_id', inventoryController.buildDetailPage)
 router.get('/getInventory/:classificationId', utilities.handleErrors(inventoryController.getInventoryJSON))
