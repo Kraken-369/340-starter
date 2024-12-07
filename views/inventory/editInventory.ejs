@@ -2,9 +2,9 @@
   <h1>
     <%= title %>
   </h1>
-  <form action="/inv/update" method="post">
+  <form action="/inv/update" id="update-form" method="post">
     <div>
-      <label for="">Classification:</label>
+      <label for="classification-list">Classification:</label>
       <div>
         <%- classificationList %>
       </div>
@@ -39,16 +39,18 @@
     </div>
     <div>
       <label for="inv_miles">Miles:</label>
-      <div><input tid="inv_miles" name="inv_miles" type="text" value="<%= inv_miles %>"></div>
+      <div><input id="inv_miles" name="inv_miles" type="text" value="<%= inv_miles %>"></div>
     </div>
     <div>
       <label for="inv_color">Color:</label>
       <div><input id="inv_color" name="inv_color" type="text" value="<%= inv_color %>"></div>
     </div>
-    <div><button type="submit">Update Vehicle</button></div>
+    <div><button id="button-update" type="submit" disabled>Update Vehicle</button></div>
     <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"<% } %>>
   </form>
 </div>
+
+<script src="/js/inventoryUpdate.js"></script>
 
 <% if (errors) { %>
   <ul class="notice">

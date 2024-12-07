@@ -94,7 +94,7 @@ Util.buildProductDetail = async data => {
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await inventoryModel.getClassifications()
-  let classificationList ='<select name="classification_id" id="classificationList">'
+  let classificationList ='<select name="classification_id" id="classification-list">'
   
   classificationList += "<option value=''>Choose a Classification</option>"
   
