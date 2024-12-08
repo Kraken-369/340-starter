@@ -126,11 +126,7 @@ inventoryController.getInventoryJSON = async (req, res, next) => {
   const classificationId = parseInt(req.params.classificationId)
   const invData = await inventoryModel.getInventoryByClassificationId(classificationId)
   
-  if (invData[0].inv_id) {
-    return res.json(invData)
-  } else {
-    next(new Error("No data returned"))
-  }
+  return res.json(invData)
 }
 
 inventoryController.buildEditInventory = async (req, res, next) => {
@@ -192,15 +188,15 @@ inventoryController.updateInventory = async function (req, res, next) {
   )
 
   if (updateResult) {
-    const itemName = updateResult.inv_make + " " + updateResult.inv_model
-    req.flash("notice", `The ${itemName} was successfully updated.`)
-    res.redirect("/inv/")
+    const itemName = `${updateResult.inv_make} ${updateResult.inv_model}` 
+    req.flash('notice', `The ${itemName} was successfully updated.`)
+    res.redirect('/inv/')
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, the edit failed.")
-    res.status(501).render("inventory/editInventory", {
-    title: "Edit " + itemName,
+    req.flash('notice', 'Sorry, the edit failed.')
+    res.status(501).render('inventory/editInventory', {
+    title: `Edit ${itemName}`,
     nav,
     classificationSelect: classificationSelect,
     errors: null,
@@ -216,6 +212,41 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_color,
     classification_id
     })
+  }
+}
+
+inventoryController.buildDeleteConfirmInventory = async (req, res, next) => {
+  const invId = parseInt(req.params.invId)
+  const itemData = await inventoryModel.getInventoryById(invId)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  let nav = await utilities.getNav()
+
+  res.render('./inventory/deleteConfirm', {
+    title: `Confirm Delete: ${itemName}`,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    classification_id: itemData.classification_id
+  })
+}
+
+inventoryController.deleteVehicle = async (req, res, next) => {
+  const { inv_id } = req.body
+  // console.log(inv_id)
+  // res.redirect('/inv/')
+  // const classification_id = parseInt(req.params.classificationId)
+  const deleteResult = await inventoryModel.deleteInventory(inv_id)
+  
+  
+  if (deleteResult) {
+    req.flash('notice', 'The vehicle was successfully deleted.')
+    res.redirect('/inv/')
+  } else {
+    req.flash('notice', 'The deletion failed.')
+    res.redirect(`/inv/delete/${inv_id}`)
   }
 }
 

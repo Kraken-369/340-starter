@@ -17,3 +17,10 @@ const toggleMenu = () => {
 }
 
 hamburgerButton.addEventListener('click', toggleMenu);
+
+setTimeout(() => {
+  const flashMessage = document.getElementById('flash-message');
+  if (flashMessage) {
+    flashMessage.style.display = 'none';
+  }
+}, 15000);

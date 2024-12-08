@@ -107,4 +107,12 @@ const updateInventory = async (
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, newVehicle, updateInventory }
+const deleteInventory = async inv_id => {
+  try {
+    const data = await pool.query("DELETE FROM public.inventory WHERE inv_id = $1 RETURNING *", [inv_id])
+    
+    return data
+  } catch (error) { console.error('Inventory model error: ', error.message) }
+}
+
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, newVehicle, updateInventory, deleteInventory }
