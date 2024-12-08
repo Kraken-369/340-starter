@@ -3,7 +3,7 @@
 
 @import url('/css/header.css');
 @import url('/css/hero.css');
-@import url('/css/navigation.css');
+@import url('/css/content.css');
 @import url('/css/footer.css');
 @import url('/css/product.css');
 
@@ -27,6 +27,11 @@
 }
 
 /*/ ==== [ Styles ] ==== /*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 *:focus {
   outline: none;
@@ -60,13 +65,17 @@ p {
   font-family: 'Barlow';
   margin: 0 auto;
   max-width: 1320px;
-  padding: 0 20px;
+  padding: 0 80px;
 }
 
 
 /*/ ==== [ Meida Queries ] ==== /*/
 
 @media screen and (max-width: 768px) {
+
+  .container {
+    padding: 0 20px;
+  }
 
   .hero {
     padding: 20px;
@@ -92,6 +101,10 @@ p {
 }
 
 @media screen and (max-width: 768px) {
+
+  .container {
+    padding: 0 20px;
+  }
 
   .nav-bar {
     display: none;

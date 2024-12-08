@@ -1,3 +1,29 @@
+header > section {
+  padding: 10px 0;
+}
+.container.account {
+  align-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.container.account :last-child {
+  margin-left: auto;
+}
+
+.logo > a {
+  align-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.logo img {
+  height: 34px;
+  margin-right: 10px;
+  width: 38px;
+}
+
 nav {
   background-color: var(--gray-dark);
   color: var(--white);
@@ -20,12 +46,11 @@ nav > .container {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
-  margin: 0;
 }
 
 .nav-bar > ul > li {
   display: inline;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .nav-bar > ul > li:first-child {
@@ -40,7 +65,7 @@ nav > .container {
   color: var(--white);
   font-size: 1.2em;
   font-weight: bold;
-  padding: 5px 20px;
+  padding: 5px 10px;
   text-decoration: none;
 }
 
@@ -49,7 +74,7 @@ nav > .container {
   border: 1px solid var(--white);
   border-radius: 5px;
   color: var(--white);
-  padding: 5px 18px;
+  padding: 5px 8px;
 }
 
 .hamburger-button {
@@ -57,7 +82,7 @@ nav > .container {
   height: 26px;
   position: absolute;
   right: 20px;
-  top: 80px;
+  top: 85px;
   width: 32px;
 }
 
