@@ -65,8 +65,8 @@ validate.loginRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 6 })
-      .withMessage('Password must be at least 6 characters long.'),
+      .isLength({ min: 12 })
+      .withMessage('Password must be at least 12 characters long.'),
   ]
 }
 

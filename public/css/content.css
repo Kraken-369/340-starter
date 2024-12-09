@@ -1,4 +1,5 @@
-.container h1 {
+.container h1,
+.container h3 {
   padding: 20px 0;
 }
 
@@ -32,4 +33,61 @@
 
 .attribute a {
   color: var(--white);
+}
+
+.container a {
+  color: var(--blue-light);
+}
+
+form {
+  border: 1px dashed var(--orange);
+  font-family: 'Barlow';
+  padding: 20px;
+}
+
+form > div {
+  border: 1px dashed var(--white-alpha);
+  margin: 10px 0;
+}
+
+form button {
+  background-color: var(--base-alpha);
+  display: inline-block;
+  padding: 10px 20px;
+  font-family: 'Barlow';
+  font-size: .8rem;
+  font-weight: bold;
+  line-height: 120%;
+  color: var(--gray-dark);
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid var(--base);
+  border-radius: 3px;
+}
+
+form label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.form-control input {
+  display: block;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gray-dark);
+  background-color: var(--white-alpha);
+  background-clip: padding-box;
+  border: 1px solid var(--base-alpha);
+  border-radius: 5px;
+}
+
+.notice {
+  background-color: var(--alert-bg);
+  border: 1px solid var(--alert-border-color);
+  border-radius: 5px;
+  color: var(--gray-dark);
+  padding: 10px 10px 10px 30px;
 }

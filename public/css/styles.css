@@ -10,6 +10,8 @@
 /*/ ==== [ Ini variables ] ==== /*/
 
 :root {
+  --alert-bg: rgb(248 215 218);
+  --alert-border-color: rgb(241 174 181);
   --base: rgb(32, 111, 141);
   --base-alpha: rgba(32, 111, 141, .55);
   --gray-dark: #131723;

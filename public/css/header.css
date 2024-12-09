@@ -1,6 +1,11 @@
 header > section {
   padding: 10px 0;
 }
+
+header > section a {
+  color: var(--gray-dark) !important;
+}
+
 .container.account {
   align-content: space-between;
   align-items: center;
