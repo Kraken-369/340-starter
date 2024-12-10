@@ -166,4 +166,17 @@ Util.logout = (req, res, next) => {
   return res.redirect('/')
 }
 
+Util.auth = (roles) => {
+  return (req, res, next) => {
+    console.log(res.locals.accountData.account_type)
+    if (!res.locals.loggedin) {
+      return res.redirect('/account/login')
+    }
+    if (!roles.includes(res.locals.accountData.account_type)) {
+      return res.redirect('/')
+    }
+    next()
+  }
+}
+
 module.exports = Util
