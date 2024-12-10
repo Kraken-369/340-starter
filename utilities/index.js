@@ -8,11 +8,16 @@ const Util = {}
 const getImage = (image, tn=false) => {
   const noImage = tn ? 'no-image-tn.png' : 'no-image.png'
   const imageDir = path.join(__dirname, '../public', image)
-  if (image !== null || image !== 'undefined' || image !== '' || !fs.existsSync(imageDir)) {
+
+  if (!image) {
     return `/images/vehicles/${noImage}`
   }
+  
+  if (fs.existsSync(imageDir)) {
+    return image
+  }
 
-  return image
+  return `/images/vehicles/${noImage}`
 }
 
 /* ************************
@@ -41,10 +46,10 @@ Util.getNav = async (req, res, next) => {
 }
 
 Util.buildClassificationGrid = async (data) => {
-  let grid
+  let grid = ''
 
   if (data.length > 0) {
-    grid = '<ul id="inv-display">'
+    grid += '<ul id="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
