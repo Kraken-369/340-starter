@@ -122,6 +122,7 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
+  res.locals.loggedin = 0
 
   if (req.cookies.jwt) {
     jwt.verify(
@@ -140,7 +141,7 @@ Util.checkJWTToken = (req, res, next) => {
   } else {
     next()
   }
-  
+
 }
 
 /* ****************************************
@@ -153,6 +154,11 @@ Util.checkLogin = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
+
+Util.logout = (req, res, next) => {
+  res.clearCookie('jwt')
+  return res.redirect('/')
+}
 
 module.exports = Util

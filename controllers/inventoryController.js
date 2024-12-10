@@ -235,9 +235,6 @@ inventoryController.buildDeleteConfirmInventory = async (req, res, next) => {
 
 inventoryController.deleteVehicle = async (req, res, next) => {
   const { inv_id } = req.body
-  // console.log(inv_id)
-  // res.redirect('/inv/')
-  // const classification_id = parseInt(req.params.classificationId)
   const deleteResult = await inventoryModel.deleteInventory(inv_id)
   
   
