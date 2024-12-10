@@ -1,18 +1,23 @@
 <div class="container">
-  <ul>
-    <li>
-      <a href="add/classification">Add new clasification</a>
-    </li>
-    <li>
-      <a href="add/vehicle">Add new vehicle</a>
-    </li>
-  </ul>
   <h2>
     <%= title %>
   </h2>
-  <%- classificationSelect %>
-  <table id="inventoryDisplay"></table>
-  <noscript>JavaScript must be enabled to use this page.</noscript>
+  <div class="panel">
+    <ul>
+      <li>
+        <a href="add/classification">Add new clasification</a>
+      </li>
+      <li>
+        <a href="add/vehicle">Add new vehicle</a>
+      </li>
+    </ul>
+    <div class="form-control">
+      <h3>List items</h3>
+      <%- classificationSelect %>
+    </div>
+    <table id="inventoryDisplay"></table>
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+  </div>
 </div>
 
 <script src="/js/inventory.js"></script>

@@ -4,6 +4,7 @@ const utilities = require('../utilities/')
 const accountController = require('../controllers/accountController')
 const registerValidate = require('../utilities/accountValidation')
 
+router.get('/', accountController.buildManagement)
 router.get('/login', utilities.handleErrors(accountController.buildLogin))
 router.get('/register', utilities.handleErrors(accountController.buildRegister))
 router.get('/logout', utilities.logout)

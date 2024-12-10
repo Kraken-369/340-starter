@@ -168,7 +168,6 @@ Util.logout = (req, res, next) => {
 
 Util.auth = (roles) => {
   return (req, res, next) => {
-    console.log(res.locals.accountData.account_type)
     if (!res.locals.loggedin) {
       return res.redirect('/account/login')
     }

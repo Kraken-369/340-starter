@@ -81,7 +81,7 @@ accountController.loginAccount = async (req, res) => {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/inv/")
+      return res.redirect('/account/')
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")
@@ -95,6 +95,20 @@ accountController.loginAccount = async (req, res) => {
   } catch (error) {
     throw new Error('Access Forbidden')
   }
+}
+
+accountController.buildManagement = async (req, res) => {
+  let nav = await utilities.getNav()
+
+  if (!res.locals.loggedin) {
+    return res.redirect('/account/login')
+  }
+  res.render('account/management', {
+    title: 'Account Management',
+    nav,
+    accountData: res.locals.accountData,
+    errors: null
+  })
 }
 
 module.exports = accountController

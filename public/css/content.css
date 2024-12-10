@@ -1,4 +1,5 @@
 .container h1,
+.container h2,
 .container h3 {
   padding: 20px 0;
 }
@@ -72,7 +73,8 @@ form label {
   margin-bottom: .5rem;
 }
 
-.form-control input {
+.form-control input,
+.form-control select {
   display: block;
   padding: .375rem .75rem;
   font-size: 1rem;
@@ -91,4 +93,25 @@ form label {
   border-radius: 5px;
   color: var(--gray-dark);
   padding: 10px 10px 10px 30px;
+}
+
+.panel {
+  background-color: var(--white-alpha);
+  border: 1px dashed var(--alert-border-color);
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.panel p,
+.panel ul li {
+  margin-bottom: 10px;
+}
+
+.panel a:hover {
+  text-decoration: underline;
+}
+
+.panel ul {
+  margin-left: 20px;
 }
