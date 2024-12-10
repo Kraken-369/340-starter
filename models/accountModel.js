@@ -21,6 +21,7 @@ const getAccountByEmail = async (account_email) => {
     const result = await pool.query(
       'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
       [account_email])
+
     return result.rows[0]
   } catch (error) {
     return new Error("No matching email found")
@@ -28,4 +29,31 @@ const getAccountByEmail = async (account_email) => {
 
 }
 
-module.exports = { registerAccount, getAccountByEmail }
+const updateAccount = async (account_id, account_firstname, account_lastname, account_email) => {
+  
+  try {
+    const result = await pool.query(
+      'update account set account_firstname = $2, account_lastname = $3, account_email = $4 where account_id = $1 returning *',
+      [account_id, account_firstname, account_lastname, account_email])
+
+    return result
+  } catch (error) {
+    return new Error('Did not update account.')
+  }
+
+}
+
+const updatePassword = async (account_id, account_password) => {
+
+  try {
+    const result = await pool.query(
+      'update account set account_password = $2 where account_id = $1 returning *',
+      [account_id, account_password])
+    return result
+  } catch (error) {
+    return new Error('Did not update password.')
+  }
+
+}
+
+module.exports = { registerAccount, getAccountByEmail, updateAccount, updatePassword }

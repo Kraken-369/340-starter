@@ -1,20 +1,50 @@
-<h1><%= title %></h1>
-<form action="/account/sign-up" method="post">
-  <label for="account_firstname">First Name:</label>
-  <input id="account_firstname" name="account_firstname" type="text">
-  <label for="account_lastname">Last Name:</label>
-  <input id="account_lastname" name="account_lastname" type="text">
-  <label for="account_email">Email address:</label>
-  <input id="account_email" name="account_email" type="email" placeholder="Enter a valid email address">
-  <label for="account_password">Password:</label>
-  <input id="account_password" name="account_password" type="password">
-  <button type="submit">Sign Up</button>
-</form>
-
-<% if (errors) { %>
-  <ul class="notice">
- <% errors.array().forEach(error => { %>
-   <li><%= error.msg %></li>
-<%  }) %>
- </ul>
-<% } %>
+<div class="container">
+  <h1><%= title %></h1>
+  <form action="/account/sign-up" method="post">
+    <div>
+      <label for="account_firstname">First Name:</label>
+      <div class="form-control">
+        <input id="account_firstname" name="account_firstname" type="text">
+      </div>
+    </div>
+    <div>
+      <label for="account_lastname">Last Name:</label>
+      <div class="form-control">
+        <input id="account_lastname" name="account_lastname" type="text">
+      </div>
+    </div>
+    <div>
+      <label for="account_email">Email address:</label>
+      <div class="form-control">
+        <input id="account_email" name="account_email" type="email" placeholder="Enter a valid email address">
+      </div>
+    </div>
+    <div>
+      <label for="account_password">Password:</label>
+      <div class="form-control">
+        <input id="account_password" name="account_password" type="password">
+      </div>
+    </div>
+    <div>
+      <label for="account_type">Account type:</label>
+      <div class="form-control">
+        <select id="account_type" name="account_type">
+          <% accountListType.forEach(type => { %>
+              <option value="<%= type %>"><%= type %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button type="submit">Sign Up</button>
+    </div>
+  </form>
+  
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+</div>

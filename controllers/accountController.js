@@ -3,6 +3,7 @@ const accountModel = require('../models/accountModel')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const accountController = {}
+const accountListType = ['Admin', 'Client', 'Employee']
 
 /* ****************************************
 *  Deliver login view
@@ -14,6 +15,7 @@ accountController.buildLogin = async (req, res, next) => {
     title: 'Login',
     nav,
     errors: null,
+    account_email: '',
   })
 }
 
@@ -23,6 +25,7 @@ accountController.buildRegister = async (req, res, next) => {
   res.render('account/register', {
     title: 'Register',
     nav,
+    accountListType,
     errors: null,
   })
 }
@@ -35,7 +38,7 @@ accountController.registerAccount = async (req, res) => {
   if (registerResult) {
     req.flash(
       "notice",
-      `Congratulations, you\'re registered ${account_firstname}. Please log in.`
+      `Congratulations, you are registered ${account_firstname}. Please log in.`
     )
     res.status(201).render("account/login", {
       title: "Login",
@@ -59,6 +62,7 @@ accountController.loginAccount = async (req, res) => {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
+  console.log(accountData)
 
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
@@ -66,7 +70,7 @@ accountController.loginAccount = async (req, res) => {
       title: "Login",
       nav,
       errors: null,
-      account_email,
+      account_email: account_email || '',
     })
     return
   }
@@ -89,7 +93,7 @@ accountController.loginAccount = async (req, res) => {
         title: "Login",
         nav,
         errors: null,
-        account_email,
+        account_email: account_email || '',
       })
     }
   } catch (error) {
@@ -99,16 +103,87 @@ accountController.loginAccount = async (req, res) => {
 
 accountController.buildManagement = async (req, res) => {
   let nav = await utilities.getNav()
-
-  if (!res.locals.loggedin) {
-    return res.redirect('/account/login')
-  }
+  
   res.render('account/management', {
     title: 'Account Management',
     nav,
     accountData: res.locals.accountData,
-    errors: null
+    errors: null,
   })
+}
+
+accountController.buildEdit = async (req, res) => {
+  let nav = await utilities.getNav()
+
+  res.render('account/edit', {
+    title: 'Edit Account',
+    nav,
+    accountListType,
+    account_id: res.locals.accountData.account_id,
+    account_firstname: res.locals.accountData.account_firstname,
+    account_lastname: res.locals.accountData.account_lastname,
+    account_email: res.locals.accountData.account_email,
+    account_type: res.locals.accountData.account_type,
+    errors: null,
+  })
+}
+
+accountController.updateAccount = async (req, res, next) => {
+  const { account_id, account_firstname, account_lastname, account_email, account_type } = req.body
+  const updateResult = await accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email, account_type)
+  let nav = await utilities.getNav()
+
+  if (updateResult) {
+    const accountData = { account_id, account_firstname, account_lastname, account_email, account_type }
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+
+    if (process.env.NODE_ENV === 'development') {
+      res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    } else {
+      res.cookie('jwt', accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+    }
+    req.flash('notice', 'The account was successfully updated.')
+    res.redirect('/account/')
+  } else {
+    req.flash('', '')
+    res.status(501).render('account/edit', {
+      title: 'Edit account',
+      nav,
+      accountListType,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_type,
+      errors: null,
+    })
+  }
+}
+
+accountController.updatePassword = async (req, res, nex) => {
+  const { account_id, account_password } = req.body
+  const updateResult = await accountModel.updatePassword(account_id, account_password)
+  
+  if (updateResult) {
+    req.flash('notice', 'The account password was successfully updated.')
+    res.redirect('/account/')
+  } else {
+    const { account_id, account_firstname, account_lastname, account_email, account_type } = res.locals.accountData
+    let nav = await utilities.getNav()
+
+    req.flash('', '')
+    res.status(501).render('account/edit', {
+      title: 'Edit account',
+      nav,
+      accountListType,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_type,
+      errors: null,
+    })
+  }
 }
 
 module.exports = accountController

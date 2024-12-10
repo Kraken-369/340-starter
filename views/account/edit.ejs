@@ -1,0 +1,60 @@
+<div class="container">
+  <h1><%= title %></h1>
+  <form action="/account/update" method="post">
+    <div>
+      <label for="account_firstname">First Name:</label>
+      <div class="form-control">
+        <input id="account_firstname" name="account_firstname" type="text" value="<%= account_firstname %>">
+      </div>
+    </div>
+    <div>
+      <label for="account_lastname">Last Name:</label>
+      <div class="form-control">
+        <input id="account_lastname" name="account_lastname" type="text" value="<%= account_lastname %>">
+      </div>
+    </div>
+    <div>
+      <label for="account_email">Email address:</label>
+      <div class="form-control">
+        <input id="account_email" name="account_email" type="email" placeholder="Enter a valid email address" value="<%= account_email %>">
+      </div>
+    </div>
+    <div>
+      <label for="account_type">Account type:</label>
+      <div class="form-control">
+        <select id="account_type" name="account_type">
+          <% accountListType.forEach(type => { %>
+          <option value="<%= type %>" <%- type == account_type ? 'selected' : '' %>><%= type %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button type="submit">Update account</button>
+    </div>
+    <input type="hidden" name="account_id" <% if(account_id) { %> value="<%= account_id %>"<% } %>>
+  </form>
+  <br>
+  <hr>
+  <h2>Change your password</h2>
+  <form action="/account/update-password" method="post">
+    <div>
+      <label for="account_password">New password:</label>
+      <div class="form-control">
+        <input id="account_password" name="account_password" type="password">
+      </div>
+    </div>
+    <div>
+      <button type="submit">Update password</button>
+    </div>
+    <input type="hidden" name="account_id" <% if(account_id) { %> value="<%= account_id %>"<% } %>>
+  </form>
+  
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+</div>
