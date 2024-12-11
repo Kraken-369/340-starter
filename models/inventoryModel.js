@@ -5,6 +5,8 @@ const pool = require('../database')
  * ************************** */
 const getClassifications = async () => await pool.query('SELECT * FROM public.classification ORDER BY classification_name')
 
+const isClassificationExists = async value => await pool.query('select * from classification where lower(classification_name) = lower($1)', [value])
+
 
 const getInventoryByClassificationId = async (classification_id) => {
   try {
@@ -115,4 +117,4 @@ const deleteInventory = async inv_id => {
   } catch (error) { console.error('Inventory model error: ', error.message) }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, newVehicle, updateInventory, deleteInventory }
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, newVehicle, updateInventory, deleteInventory, isClassificationExists }
