@@ -23,7 +23,7 @@ create table if not exists public.inventory (
   inv_miles integer not null,
   inv_color character varying not null,
   inv_for_rent boolean not null default false,
-  inv_status boolean not null default true,
+  inv_available boolean not null default true,
   inv_price_day numeric(9, 0) not null default 0,
   classification_id integer not null,
   constraint inventory_pkey primary key (inv_id)

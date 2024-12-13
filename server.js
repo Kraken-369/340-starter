@@ -54,6 +54,7 @@ app.use(static)
 app.use('/inv', inventoryRoute)
 app.use('/inv', require('./routes/classificationRoute'))
 app.use('/account', require('./routes/accountRoute'))
+app.use('/rentacar', require('./routes/rentacarRoute'))
 app.get('/', baseController.buildHome)
 
 /* -----[ Middleware to handling routes not found ]----- */

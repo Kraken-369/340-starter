@@ -40,6 +40,7 @@ Util.getNav = async (req, res, next) => {
       '</a>'
     list += '</li>'
   })
+  list += '<li><a href="/rentacar" title="Rentacar">Rentacar</a></li>'
   list += '</ul>'
   
   return list
@@ -176,6 +177,16 @@ Util.auth = (roles) => {
     }
     next()
   }
+}
+
+Util.buildRentList = data => {
+  let dataTable = ''
+
+  if (data.length > 0) {} else {
+    dataTable += '<tr><td>No data available</td></tr>'
+  }
+
+  return dataTable
 }
 
 module.exports = Util
