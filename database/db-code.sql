@@ -266,8 +266,8 @@ update public.inventory
 set inv_image = replace(inv_image, '/images', '/images/vehicles'),
 	inv_thumbnail = replace(inv_thumbnail, '/images', '/images/vehicles');
 
-insert into public.account (account_firstname, account_lastname, account_password, account_email, account_type)
+insert into public.account (account_firstname, account_lastname, account_email, account_password, account_type)
   values
     ('Basic', 'Client', 'basic@340.edu', 'I@mABas1cCl!3nt', 'Client'),
-    ('Happ',	'Employee',	'happy@340.edu',	'I@mAnEmpl0y33',	'Employee'),
+    ('Happy',	'Employee',	'happy@340.edu',	'I@mAnEmpl0y33',	'Employee'),
     ('Manager',	'User',	'manager@340.edu',	'I@mAnAdm!n1strat0r',	'Admin');

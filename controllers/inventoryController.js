@@ -80,7 +80,9 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
     inv_thumbnail,
     inv_price,
     inv_miles,
-    inv_color
+    inv_color,
+    inv_for_rent,
+    inv_price_day,
   } = req.body
   const registerResult = await inventoryModel.newVehicle(
     classification_id,
@@ -92,7 +94,9 @@ inventoryController.registerNewVehicle = async (req, res, next) => {
     inv_thumbnail,
     inv_price,
     inv_miles,
-    inv_color
+    inv_color,
+    inv_for_rent,
+    inv_price_day,
   )
   let nav = await utilities.getNav()
   let classificationList = await utilities.buildClassificationList()
@@ -133,13 +137,13 @@ inventoryController.buildEditInventory = async (req, res, next) => {
   const invId = parseInt(req.params.invId)
   const itemData = await inventoryModel.getInventoryById(invId)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
-  const classificationSelect = await utilities.buildClassificationList(itemData.classification_id)
+  const classificationList = await utilities.buildClassificationList(itemData.classification_id)
   let nav = await utilities.getNav()
 
   res.render("./inventory/editInventory", {
     title: "Edit: " + itemName,
     nav,
-    classificationList: classificationSelect,
+    classificationList,
     errors: null,
     inv_id: itemData.inv_id,
     inv_make: itemData.inv_make,
@@ -151,6 +155,9 @@ inventoryController.buildEditInventory = async (req, res, next) => {
     inv_price: itemData.inv_price,
     inv_miles: itemData.inv_miles,
     inv_color: itemData.inv_color,
+    inv_for_rent: itemData.inv_for_rent,
+    inv_price_day: itemData.inv_price_day,
+    inv_available: itemData.inv_available,
     classification_id: itemData.classification_id
   })
 }
@@ -171,6 +178,9 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_year,
     inv_miles,
     inv_color,
+    inv_for_rent,
+    inv_price_day,
+    inv_available,
     classification_id,
   } = req.body
   const updateResult = await inventoryModel.updateInventory(
@@ -184,6 +194,9 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_year,
     inv_miles,
     inv_color,
+    inv_for_rent,
+    inv_price_day,
+    inv_available,
     classification_id
   )
 
@@ -192,13 +205,13 @@ inventoryController.updateInventory = async function (req, res, next) {
     req.flash('notice', `The ${itemName} was successfully updated.`)
     res.redirect('/inv/')
   } else {
-    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const classificationList = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
     req.flash('notice', 'Sorry, the edit failed.')
     res.status(501).render('inventory/editInventory', {
     title: `Edit ${itemName}`,
     nav,
-    classificationSelect: classificationSelect,
+    classificationList,
     errors: null,
     inv_id,
     inv_make,
@@ -210,6 +223,9 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_price,
     inv_miles,
     inv_color,
+    inv_for_rent,
+    inv_price_day,
+    inv_available,
     classification_id
     })
   }

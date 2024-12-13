@@ -5,56 +5,79 @@
   <form action="/inv/add-vehicle" method="post">
     <div>
       <label for="">Classification:</label>
-      <div>
+      <div class="form-control">
         <%- classificationList %>
       </div>
     </div>
     <div>
       <label for="inv_make">Make:</label>
-      <div><input id="inv_make" name="inv_make" type="text"></div>
+      <div class="form-control">
+        <input id="inv_make" name="inv_make" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_model">Model:</label>
-      <div><input id="inv_model" name="inv_model" type="text"></div>
+      <div class="form-control">
+        <input id="inv_model" name="inv_model" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_year">Year:</label>
-      <div><input id="inv_year" name="inv_year" type="text"></div>
+      <div class="form-control">
+        <input id="inv_year" name="inv_year" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_description">Description:</label>
-      <div><textarea name="inv_description" id="inv_description"></textarea></div>
+      <div class="form-control">
+        <textarea name="inv_description" id="inv_description"></textarea>
+      </div>
     </div>
     <div>
       <label for="inv_image">Image:</label>
-      <div><input id="inv_image" name="inv_image" type="text"></div>
+      <div class="form-control">
+        <input id="inv_image" name="inv_image" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_thumbnail">Thumbnail:</label>
-      <div><input id="inv_thumbnail" name="inv_thumbnail" type="text"></div>
+      <div class="form-control">
+        <input id="inv_thumbnail" name="inv_thumbnail" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_price">Price:</label>
-      <div><input id="inv_price" name="inv_price" type="text"></div>
+      <div class="form-control">
+        <input id="inv_price" name="inv_price" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_miles">Miles:</label>
-      <div><input tid="inv_miles" name="inv_miles" type="text"></div>
+      <div class="form-control">
+        <input tid="inv_miles" name="inv_miles" type="text">
+      </div>
     </div>
     <div>
       <label for="inv_color">Color:</label>
-      <div><input id="inv_color" name="inv_color" type="text"></div>
+      <div class="form-control">
+        <input id="inv_color" name="inv_color" type="text">
+      </div>
     </div>
     <div>
       <h3>Setting for rent</h3>
+      <hr>
     </div>
     <div>
-      <label for="inv_miles">Is for rent:</label>
-      <div><input tid="inv_miles" name="inv_miles" type="checkbox"></div>
+      <label for="inv_for_rent">Is for rent:</label>
+      <div class="form-control">
+        <input tid="inv_for_rent" name="inv_for_rent" type="checkbox">
+      </div>
     </div>
     <div>
-      <label for="inv_color">Price per day:</label>
-      <div><input id="inv_color" name="inv_color" type="text"></div>
+      <label for="inv_price_day">Price per day:</label>
+      <div class="form-control">
+        <input id="inv_price_day" name="inv_price_day" type="text">
+      </div>
     </div>
     <div><button type="submit">Add to inventory</button></div>
   </form>
