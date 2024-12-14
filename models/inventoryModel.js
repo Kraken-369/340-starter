@@ -1,14 +1,15 @@
 const pool = require('../database')
+const inventoryModel = {}
 
 /* ***************************
  *  Get all classification data
  * ************************** */
-const getClassifications = async () => await pool.query('SELECT * FROM public.classification ORDER BY classification_name')
+inventoryModel.getClassifications = async () => await pool.query('SELECT * FROM public.classification ORDER BY classification_name')
 
-const isClassificationExists = async value => await pool.query('select * from classification where lower(classification_name) = lower($1)', [value])
+inventoryModel.isClassificationExists = async value => await pool.query('select * from classification where lower(classification_name) = lower($1)', [value])
 
 
-const getInventoryByClassificationId = async (classification_id) => {
+inventoryModel.getInventoryByClassificationId = async (classification_id) => {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory AS i 
@@ -25,7 +26,7 @@ const getInventoryByClassificationId = async (classification_id) => {
   }
 }
 
-const getInventoryById = async (inv_id) => {
+inventoryModel.getInventoryById = async (inv_id) => {
   try {
     const data = await pool.query(
       `select * from public.inventory where inv_id = $1`, [inv_id]
@@ -38,7 +39,7 @@ const getInventoryById = async (inv_id) => {
   } 
 }
 
-const newVehicle = async ( 
+inventoryModel.newVehicle = async ( 
   classification_id,
   inv_make,
   inv_model,
@@ -78,7 +79,7 @@ const newVehicle = async (
 /* ***************************
  *  Update Inventory Data
  * ************************** */
-const updateInventory = async (
+inventoryModel.updateInventory = async (
   inv_id,
   inv_make,
   inv_model,
@@ -119,7 +120,7 @@ const updateInventory = async (
   }
 }
 
-const deleteInventory = async inv_id => {
+inventoryModel.deleteInventory = async inv_id => {
   try {
     const data = await pool.query("DELETE FROM public.inventory WHERE inv_id = $1 RETURNING *", [inv_id])
     
@@ -127,4 +128,4 @@ const deleteInventory = async inv_id => {
   } catch (error) { console.error('Inventory model error: ', error.message) }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, newVehicle, updateInventory, deleteInventory, isClassificationExists }
+module.exports = inventoryModel

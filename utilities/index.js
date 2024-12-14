@@ -182,7 +182,19 @@ Util.auth = (roles) => {
 Util.buildRentList = data => {
   let dataTable = ''
 
-  if (data.length > 0) {} else {
+  if (data.length > 0) {
+    dataTable = '<thead>';
+    dataTable += '<tr><th><h3>Vehicle Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>';
+    dataTable += '</thead>';
+
+    dataTable += '<tbody>';
+    data.forEach(element => {
+      dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`;
+      dataTable += `<td>$ ${new Intl.NumberFormat('en-US').format(element.inv_price_day)}</td>`;
+      dataTable += `<td width="60px"><a class="button-rent" href="/rentacar/${element.inv_id}" title="Click to rent">Rent</a></td></tr>`;
+    });
+    dataTable += '</tbody>';
+  } else {
     dataTable += '<tr><td>No data available</td></tr>'
   }
 

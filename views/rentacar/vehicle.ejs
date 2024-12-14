@@ -1,0 +1,28 @@
+<div class="container">
+  <h1><%= title %></h1>
+  <hr>
+  <div class="product-detail">
+    <%- detail %>
+  </div>
+  <form action="/rentacar/proceed" id="rentacar-form" method="post">
+    <div>
+      <label for="start_date">Start date</label>
+      <div class="form-control" id="start_date">
+        <input class="start_date" id="start_date" type="date">
+      </div>
+    </div>
+    <div>
+      <label for="days">Days for rent</label>
+      <div class="form-control">
+        <input class="days" id="days" type="number"></div>
+    </div>
+    <div>
+      <label for="total_cost">Total Cost USD</label>
+      <div class="form-control">
+        <input class="total_cost" id="total_cost" type="text" disabled></div>
+    </div>
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <input type="hidden" name="account_id" value="<%= account_id %>">
+    <button class="submit">Proceed to rent</button>
+  </form>
+</div>
