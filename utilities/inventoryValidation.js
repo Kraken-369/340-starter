@@ -72,6 +72,16 @@ validation.checkDatas = async (req, res, next) => {
       title: 'Add Classification',
       nav,
       classificationList,
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
       errors,
     })
 
