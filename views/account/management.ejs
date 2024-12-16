@@ -4,6 +4,7 @@
   <h2>Welcome <%= accountData.account_firstname %> <%= accountData.account_lastname %>!</h2>
   <div class="panel">
     <p><a href="/account/edit">Update account information</a></p>
+    <p><a href="/rentacar/" class="">Rent a car</a></p>
     <% if (accountData.account_type != 'Client') { %>
     <p><a href="/inv/">Inventory Management</a></p>
     <% } %>

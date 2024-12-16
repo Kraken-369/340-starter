@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const calculateTotalCost = () => {
     const days = parseInt(daysInput.value) || 0;
     const totalCost = days * invPriceDay;
-    totalCostInput.value = totalCost.toFixed(2);
+    totalCostInput.value = totalCost;
   }
 
   daysInput.addEventListener('input', calculateTotalCost);

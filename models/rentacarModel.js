@@ -13,19 +13,9 @@ rentacarModel.getInventoryForRent = async () => {
   
 }
 
-rentacarModel.changeCarStatus = async (inv_id, status) => {
+rentacarModel.insertNewRent = async (account_id, inv_id, start_date, days, total_cost) => {
   try {
-    const result = await pool.query("UPDATE public.inventory SET inv_available = $2 WHERE inv_id = $1 returning *", [inv_id, status])
-
-    return result
-  } catch (error) { 
-    console.error('Rentacar model error: ', error.message)
-  }
-}
-
-rentacarModel.insertNewRent = async (account_id, inv_id, start_date, end_date, total_price) => {
-  try {
-    const result = await pool.query("INSERT INTO public.rent (account_id, inv_id, start_date, end_date, total_price) VALUES ($1, $2, $3, $4, $5) returning *", [account_id, inv_id, start_date, end_date, total_price])
+    const result = await pool.query("INSERT INTO public.rental (account_id, inv_id, start_date, days, total_cost) VALUES ($1, $2, $3, $4, $5) returning *", [account_id, inv_id, start_date, days, total_cost])
     
     return result.rows
   } catch (error) {

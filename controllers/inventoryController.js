@@ -157,7 +157,6 @@ inventoryController.buildEditInventory = async (req, res, next) => {
     inv_color: itemData.inv_color,
     inv_for_rent: itemData.inv_for_rent,
     inv_price_day: itemData.inv_price_day,
-    inv_available: itemData.inv_available,
     classification_id: itemData.classification_id
   })
 }
@@ -180,7 +179,6 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_color,
     inv_for_rent,
     inv_price_day,
-    inv_available,
     classification_id,
   } = req.body
   const updateResult = await inventoryModel.updateInventory(
@@ -196,7 +194,6 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_color,
     inv_for_rent,
     inv_price_day,
-    inv_available,
     classification_id
   )
 
@@ -225,7 +222,6 @@ inventoryController.updateInventory = async function (req, res, next) {
     inv_color,
     inv_for_rent,
     inv_price_day,
-    inv_available,
     classification_id
     })
   }

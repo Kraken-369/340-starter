@@ -23,7 +23,6 @@ create table if not exists public.inventory (
   inv_miles integer not null,
   inv_color character varying not null,
   inv_for_rent boolean not null default false,
-  inv_available boolean not null default true,
   inv_price_day numeric(9, 0) not null default 0,
   classification_id integer not null,
   constraint inventory_pkey primary key (inv_id)
@@ -54,7 +53,7 @@ create table if not exists public.rental (
   inv_id integer not null,
   start_date date not null,
   days integer not null,
-  total_price numeric(9, 0) not null default 0,
+  total_cost numeric(9, 0) not null default 0,
   constraint rental_pkey primary key (id)
 );
 
@@ -66,7 +65,7 @@ alter table if exists public.rental
 
 alter table if exists public.rental
   add constraint fk_inventory foreign key (inv_id)
-  references public.account (account_id)
+  references public.inventory (inv_id)
   on update cascade
   on delete no action;
 

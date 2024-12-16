@@ -26,7 +26,8 @@ inventoryModel.getInventoryByClassificationId = async (classification_id) => {
   }
 }
 
-inventoryModel.getInventoryById = async (inv_id) => {
+inventoryModel.getInventoryById = async inv_id => {
+
   try {
     const data = await pool.query(
       `select * from public.inventory where inv_id = $1`, [inv_id]
@@ -37,6 +38,7 @@ inventoryModel.getInventoryById = async (inv_id) => {
     console.error(`getInventoryById error: ${error}`)
     throw error
   } 
+  
 }
 
 inventoryModel.newVehicle = async ( 
@@ -92,12 +94,11 @@ inventoryModel.updateInventory = async (
   inv_color,
   inv_for_rent,
   inv_price_day,
-  inv_available,
   classification_id
 ) => {
   try {
     const sql =
-      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, inv_for_rent = $10, inv_price_day = $11, inv_available = $12, classification_id = $13 WHERE inv_id = $14 RETURNING *"
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, inv_for_rent = $10, inv_price_day = $11, classification_id = $12 WHERE inv_id = $13 RETURNING *"
     const data = await pool.query(sql, [
       inv_make,
       inv_model,
@@ -110,7 +111,6 @@ inventoryModel.updateInventory = async (
       inv_color,
       inv_for_rent,
       inv_price_day,
-      inv_available,
       classification_id,
       inv_id
     ])

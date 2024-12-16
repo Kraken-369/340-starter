@@ -40,7 +40,6 @@ Util.getNav = async (req, res, next) => {
       '</a>'
     list += '</li>'
   })
-  list += '<li><a href="/rentacar" title="Rentacar">Rentacar</a></li>'
   list += '</ul>'
   
   return list

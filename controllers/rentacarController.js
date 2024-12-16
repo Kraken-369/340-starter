@@ -5,22 +5,20 @@ const rentacarController = {}
 
 rentacarController.buildRentacar = async (req, res, next) => {
   const nav = await utilities.getNav();
-  const classificationList = await utilities.buildClassificationList();
   const forRentList = await rentacarModel.getInventoryForRent();
-  const rentList = await utilities.buildRentList(forRentList);
+  const rentList = utilities.buildRentList(forRentList);
 
   res.render('rentacar/dashboard', {
     title: 'Choose Rent a Car',
     nav,
-    classificationList,
     rentList,
     errors: null,
   })
 }
 
 rentacarController.getRentacar = async (req, res, next) => {
-  const nav = await utilities.getNav();
-  const vehicle = await inventory.getInventoryById(req.params.invId);
+  const nav = await utilities.getNav()
+  const vehicle = await inventory.getInventoryById(req.params.invId)
   const detail = await utilities.buildProductDetail(vehicle)
 
   res.render('rentacar/vehicle', {
@@ -35,27 +33,35 @@ rentacarController.getRentacar = async (req, res, next) => {
 }
 
 rentacarController.newRent = async (req, res, next) => {
-  const nav = await utilities.getNav();
-  const { inv_id, account_id, start_date, days, total_cost } = req.body
-  const changeStatus = await rentacarModel.changeCarStatus(inv_id, false)
-  const result = await rentacarModel.insertNewRent(inv_id, account_id, start_date, days, total_cost)
+  const { account_id, inv_id, start_date, days, inv_price_day } = req.body
+  const result = await rentacarModel.insertNewRent(account_id, inv_id, start_date, days, days * inv_price_day)
+  const nav = await utilities.getNav()
 
-  if (changeStatus &&result) {
+  if (result) {
+    const forRentList = await rentacarModel.getInventoryForRent();
+    const rentList = utilities.buildRentList(forRentList);
+    
     req.flash('notice', 'Rent created successfully')
-    res.redirect('/rentacar/dashboard', {
+    res.status(201).render('rentacar/dashboard', {
       title: 'Rent a Car',
       nav,
+      rentList,
       errors: null
     })
   } else {
-    res.redirect('/rentacar/dashboard', {
+    const vehicle = await inventory.getInventoryById(inv_id)
+    const detail = await utilities.buildProductDetail(vehicle)
+
+    res.status(501).render('rentacar/vehicle', {
       title: 'Rent a Car',
       nav,
+      detail,
       inv_id,
       account_id,
       start_date,
       days,
-      total_cost,
+      inv_price_day,
+      total_cost: days * inv_price_day,
       errors: null
     })
   }
