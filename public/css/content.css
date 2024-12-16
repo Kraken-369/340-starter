@@ -115,3 +115,9 @@ form label {
 .panel ul {
   margin-left: 20px;
 }
+
+.show-rentals th {
+  font-family: 'Cabin';
+  padding: 5px;
+  text-align: center;
+}

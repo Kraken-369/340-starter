@@ -10,6 +10,7 @@ rentacarController.buildRentacar = async (req, res, next) => {
 
   res.render('rentacar/dashboard', {
     title: 'Choose Rent a Car',
+    account_id: res.locals.accountData.account_id,
     nav,
     rentList,
     errors: null,
@@ -44,6 +45,7 @@ rentacarController.newRent = async (req, res, next) => {
     req.flash('notice', 'Rent created successfully')
     res.status(201).render('rentacar/dashboard', {
       title: 'Rent a Car',
+      account_id: res.locals.accountData.account_id,
       nav,
       rentList,
       errors: null
@@ -65,6 +67,18 @@ rentacarController.newRent = async (req, res, next) => {
       errors: null
     })
   }
+}
+
+rentacarController.lastRentals = async (req, res, next) => {
+  const nav = await utilities.getNav()
+  const lastRentalList = await rentacarModel.getLastRentals(res.locals.accountData.account_id)
+  const detail = utilities.buildLastRentalList(lastRentalList)
+
+  res.render('rentacar/rentals', {
+    title: 'My last rentals',
+    nav,
+    detail,
+  })
 }
 
 module.exports = rentacarController;

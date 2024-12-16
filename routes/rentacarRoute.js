@@ -6,6 +6,7 @@ const utils = require('../utilities/')
 
 router.get('/', utils.handleErrors(rentacar.buildRentacar))
 router.get('/:invId', utils.handleErrors(rentacar.getRentacar))
+router.get('/last/:accountId', rentacar.lastRentals)
 router.post('/proceed', validate.rules(), validate.checkInputs, utils.handleErrors(rentacar.newRent))
 
 module.exports = router;
